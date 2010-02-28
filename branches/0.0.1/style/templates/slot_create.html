@@ -1,0 +1,32 @@
+<script src="javascript/forms.js" type="text/JavaScript"></script>
+<script src="javascript/ajax.js" type="text/JavaScript"></script>
+
+<div style="width: 300px; float: right">
+    <div id="AJAX_update">&nbsp;</div>
+    <fieldset><legend>Create a Slot</legend>
+        <form action="javascript/AJAX" method="post" id="create">
+        <p>Enter the details of the slot you want to create.</p>
+        <dl>    
+            <dt><label><strong>Start Time</strong> <small>(24-hour HH:MM)</small></label></dt>
+            <dd>
+                <input class="mono" type="text" name="start_time_h" id="s_h" size="2" maxlength="2" />&nbsp;:
+                <input class="mono" type="text" name="start_time_m" id="s_m" size="2" maxlength="2" />
+            </dd>
+        </dl><dl>
+            <dt><label><strong>End Time</strong> <small>(24-hour HH:MM)</small></label></dt>
+            <dd>
+                <input class="mono" type="text" name="end_time_h" id="e_h" size="2" maxlength="2" />&nbsp;:
+                <input class="mono" type="text" name="end_time_m" id="e_m" size="2" maxlength="2" />
+            </dd>
+        </dl><dl>
+            <dt><label><strong>Days Available</strong> <small>| <a href="javascript:check_all('days')">Check All</a></small></label></dt>
+                <dd>
+                    <?php echo days_hash_to_form("0000000", $days_letters, $days_short); ?>
+               </dd>
+       </dl><dl>
+           <dd><input type="button" onclick="javascript:if(slot_validate('create')){ajax_form_submit('create', 'AJAX_update', 'slots.php?mode=create&amp;ajax',true,'slotsTable', 'slots.php?ajax');}" value="Create Slot" name="submit" /></dd>
+       </dl>
+       </form>
+    </fieldset>
+   
+</div>
