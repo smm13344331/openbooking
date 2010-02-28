@@ -1,0 +1,6 @@
+2010-02-14 @ 16:00  - Creation AJAX working: updates the table after create, displays hide-able text box
+                    - TODO: Move update to AJAX (in-place updates)
+                    - Code "deletion" function
+                    
+2010-02-14 @ 20:40 - Slot Update AJAX working
+                    - TODO: Code slot delete
