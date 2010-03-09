@@ -12,12 +12,12 @@ $phpExt = substr(strrchr(__FILE__, '.'), 1);
 
 require_once $root_path . 'includes/common.' . $phpExt;
 
-require_once $root_path . 'style/templates/page-header.php';
+require_once $root_path . 'style/templates/page-header.html';
 
 $sql = "SELECT * FROM " . BOOKINGS_TABLE . "";
 $result = $db->Execute($sql);
 rs2html($result);
 echo $db->Version();
-require_once $root_path . 'style/templates/page-footer.php';
+require_once $root_path . 'style/templates/page-footer.html';
 
 ?>

@@ -5,30 +5,52 @@
  * Copyright (c) 2010 Craig Watson [ craig@cwatson.org ]
  * Distributed Under the Mozilla Public License 1.1 [ http://www.mozilla.org/MPL/MPL-1.1.html ]
  */
-
+ 
 define('IN_OB', true);
 $root_path = (defined('ROOT_PATH')) ? ROOT_PATH : './';
 $phpExt = substr(strrchr(__FILE__, '.'), 1);
 
 require_once $root_path . 'includes/common.' . $phpExt;
+require_once $root_path . 'includes/functions_slots.' . $phpExt;
 
-require_once $root_path . 'style/templates/page-header.php';?>
-<h2>Slot Management</h2>
+$mode = (isset($_GET['mode'])) ? $_GET['mode'] : "retrieve";
+$ajax = isset($_GET['ajax']);
 
-<?php 
-// Check for POST Submit
-if (isset($_POST['submit'])) {
+$template = array(
+                'page_title' => "Slot Management",
+                'page_header' => "Slot Management"
+            );
 
-    print_debug($_POST);
-
+if (!$ajax) {
+    require_once $root_path . 'style/templates/page-header.html';
+    $row = FALSE;
+} else {
+    $row = isset($_GET['row']);
 }
 
-require_once $root_path . 'style/templates/form_slots.php';
+switch($mode) {
 
-//$all_slots = $db->GetAssoc("SELECT * FROM " . SLOTS_TABLE);
-//print_debug($all_slots);
+    case 'create':
+        require_once $root_path . 'includes/slot_create.' . $phpExt;
+        break;
+        
+    case 'update':
+        require_once $root_path . 'includes/slot_update.' . $phpExt;
+        break;
+        
+    case 'delete':
+        require_once $root_path . 'includes/slot_delete.' . $phpExt;
+        break;
+        
+    case 'retrieve':
+        require_once $root_path . 'includes/slot_retrieve.' . $phpExt;
+        break;
+}
 
-require_once $root_path . 'style/templates/page-footer.php';
+if (!$ajax) {
+    require_once $root_path . 'style/templates/page-footer.html';
+}
+    
 
 ?>
 
