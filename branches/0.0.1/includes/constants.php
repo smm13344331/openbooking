@@ -1,6 +1,6 @@
 <?php
 /*
- * $Id: constants.php 9 2010-02-19 12:57:09Z maidenfan $
+ * $Id$
  * OpenBooking version 0.0.1
  * Copyright (c) 2010 Craig Watson [ craig@cwatson.org ]
  * Distributed Under the Mozilla Public License 1.1 [ http://www.mozilla.org/MPL/MPL-1.1.html ]
