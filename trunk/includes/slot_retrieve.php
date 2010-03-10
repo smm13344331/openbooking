@@ -14,13 +14,19 @@ $sql = "SELECT * FROM " . SLOTS_TABLE;
 if (!$ajax){
     require_once $root_path . 'style/templates/slot_create.html';?>
 
-<div id="slotsTable"><div style="margin-right: 340px;">
+<div style="margin-right: 340px;">
 
 <h3>Current Slots</h3>
 <p>To update or delete a slot, click on the appropriate icon in the table below. To create a new slot, enter the details in the form on the right.</p>
 <script src="javascript/slots.js" type="text/JavaScript"></script>
 
-<table class="slots" style="margin: 0px auto;" border="0" id="slots" cellspacing="1" cellpadding="5">
+<table id="slotsTable" class="slots" style="margin: 0px auto;" border="0" cellspacing="1" cellpadding="5">
+<?php } else {
+    if ($row){
+        $sql .= " WHERE slot_id = " . addslashes(htmlspecialchars($_GET['row']));
+    }
+}
+?>
     <tr>
         <th>Start</th>
         <th>End</th>
@@ -30,17 +36,11 @@ if (!$ajax){
     </tr>
 <?php
 
-} else {
-    if ($row){
-        $sql .= " WHERE slot_id = " . addslashes(htmlspecialchars($_GET['row']));
-    }
-}
-
 $sql .= " ORDER BY time_start ASC, days_hash DESC";
 $all_slots = $db->Execute($sql);
 
-foreach($all_slots as $slot) {?>
-    <?php if (!$row) { echo '<tr id="row_' . $slot['slot_id'] . '">' . "\n"; }?>
+foreach($all_slots as $slot) {
+    if (!$row) { echo '<tr id="row_' . $slot['slot_id'] . '">' . "\n"; }?>
         <td>
             <p class="edit_default" id="d_start_<?php echo $slot['slot_id']; ?>"><?php echo substr($slot['time_start'],0,5); ?></p>
             <p style="display: none" id="h_start_<?php echo $slot['slot_id']; ?>">
@@ -64,14 +64,12 @@ foreach($all_slots as $slot) {?>
             <p style="display: none" id="h_update_<?php echo $slot['slot_id']; ?>"><input type="button" value="Update" name="update" onclick="javascript:save_edit('<?php echo $slot['slot_id']; ?>')" /><br /><input type="button" value="Cancel" name="cancel" onclick="javascript:toggle_edit('<?php echo $slot['slot_id'];?>')" /></p>
         </td>
         <td><p><a href="javascript:delete_row('<?php echo $slot['slot_id']; ?>','<?php echo substr($slot['time_start'],0,5); ?>','<?php echo substr($slot['time_end'],0,5); ?>','<?php echo days_hash_to_text($slot['days_hash']);?>')"><img src="style/images/icons/delete.png" alt="Delete" title="Delete" /></a></p></td>
-    <?php if (!$row) { echo "</tr>\n"; }?>
-<?php
+    <?php
+        if (!$row) { echo "</tr>\n"; }
+
 } // End foreach
 
 if (!$ajax) {
-?>
-</table>
-</div></div>
-<?php
-} // End $ajax
+    echo "</table>\n</div>\n";
+}
 ?>
