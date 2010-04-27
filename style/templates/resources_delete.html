@@ -1,9 +1,0 @@
-<h3>Delete Resource</h3>
-    <form id="resource_delete" action="#" method="post" onsubmit="return false">
-    <p>Please confirm that you wish to delete the highlighted resource.</p>
-    <p>
-        <input type="hidden" name="id" value="<?php echo $id;?>" ?>
-        <input onclick="ajax_form_submit('resource_delete', 'AJAX_update', 'admin.php?tab=resources&amp;mode=delete&amp;id=<?php echo $id;?>&amp;ajax',true,'resources_container', 'admin.php?tab=resources&amp;ajax')" type="button" name="submit" value="Delete" />
-        <input type="button" onclick="$$('table#resources_table tr').invoke('removeClassName','highlight');hide_element('AJAX_update')" value="Cancel" />
-    </p>
-    </form>
