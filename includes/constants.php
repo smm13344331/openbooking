@@ -29,8 +29,10 @@ define('ADVANCE_HOUR',  'h');
 define('RESOURCES_TABLE',           $table_prefix . "resources");
 define('BOOKINGS_TABLE',            $table_prefix . "bookings");
 define('SLOTS_TABLE',               $table_prefix . "slots");
-define('RESOURCE_CATEGORIES_TABLE', $table_prefix . "resource_categories");
+define('RESOURCE_CATEGORIES_TABLE', $table_prefix . "categories");
+define('LOCATIONS_TABLE',           $table_prefix . "locations");
+
+// Location indentation multiplier, in pixels
+define('LOCATION_INDENT', 30);
 
 ?>
-
-

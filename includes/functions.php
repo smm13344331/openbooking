@@ -121,8 +121,7 @@ function days_hash_to_form($hash,$days,$days_vals){
 
 }
 
-/* Displays an error message.
- */
+/* Displays an error message. */
 function display_error($text,$fatal = FALSE){
 
     global $root_path;
@@ -133,6 +132,21 @@ function display_error($text,$fatal = FALSE){
         exit();
    }
 
+}
+
+/* Loops through an array of files, including each */
+function template_parse($files) {
+
+    global $template, $root_path;
+
+    foreach ($files as $file) {
+        require_once $root_path . "style/templates/$file";
+    }
+}
+
+/** Simple function to encapsulate cleaning of strings **/
+function clean_string($string){
+    return trim(addslashes(htmlspecialchars($string)));
 }
 
 ?>

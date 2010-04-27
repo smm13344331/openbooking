@@ -1,0 +1,35 @@
+<script src="javascript/forms.js" type="text/JavaScript"></script>
+<script src="javascript/ajax.js" type="text/JavaScript"></script>
+<script src="javascript/locations.js" type="text/JavaScript"></script>
+
+<div class="right_panel" style="width: 175px">
+    <div id="AJAX_update">&nbsp;</div>
+    <fieldset><h3>Create Location</h3>
+    <p><small>The 'Parents' drop-down will automatically refresh to contain a list of valid parent locations in the tree.</small></p>
+    <form action="#" method="post" id="create" onsubmit="return false">
+    <dl>
+        <dt><label for="type"><strong>Type</strong></label></dt>
+        <dd><select name="type" id="type" onchange="updateParent()">
+                <option value="0" selected="selected">Please choose ...</option>
+                <option value="1">1 - Building</option>
+                <option value="2">2 - Floor</option>
+                <option value="3">3 - Area</option>
+                <option value="4">4 - Room</option>
+            </select></dd>
+    </dl>   <dl>
+        <dt><label for="name"><strong>Name</strong></label></dt>
+        <dd><input type="text" name="name" id="name" size="15" /></dd>
+    </dl><dl>
+        <dt><label for="parent"><strong>Parent</strong></label></dt>
+        <dd id="parentHolder"><select name="parent" id="parent">
+                <option value="0">No Parent</option>
+            </select>
+        </dd>
+    </dl>
+    <p><small>Once locations have been created, refresh the page to see them in the "Parent" drop-down box.</small></p>
+    <dl>
+        <dd><input onclick="javascript:if(validateForm()){ajax_form_submit('create', 'AJAX_update', 'admin.php?tab=locations&amp;mode=create&amp;ajax',true,'locations_map', 'admin.php?tab=locations&amp;ajax');}" type="button" value="Create Location" name="submit" /></dd>
+    </dl>
+    </form>
+    </fieldset>
+</div>

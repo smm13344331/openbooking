@@ -29,10 +29,10 @@ function generate_post(formID){
     var form = document.getElementById(formID);
     var postText = "";
     var check = 0;
-    
+
     // Loops through the form elements and builds the POST text
     for(i = 0; i < form.elements.length; i++){
-        
+            //alert(form.elements[i].value);
         var elName = form.elements[i].name;
         var elValue = form.elements[i].value;
         

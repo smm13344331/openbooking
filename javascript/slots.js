@@ -1,7 +1,10 @@
 
-    /** JAVASCRIPT -- Functions to edit slots **/
+    /** JAVASCRIPT -- Functions for slots **/
 
 function toggle_edit(row_num) {
+
+    // Clear highlights
+    $$('table.#slotsTable td').invoke('removeClassName','highlight');
 
     // Declare an array of fields to toggle
     var fields = ["start","end","days","update"];
@@ -14,16 +17,21 @@ function toggle_edit(row_num) {
         
         	var to_show = 'h_' + fields[i] + "_" + row_num;
         	var to_hide = 'd_' + fields[i] + "_" + row_num;
+        	var toggle = true;
         } else {
 			var to_hide = 'h_' + fields[i] + "_" + row_num;
 		    var to_show = 'd_' + fields[i] + "_" + row_num;
+		    var toggle = false;
 		}
         
         // Do the hiding/showing as appropriate
         new Effect.BlindUp(to_hide, {duration: 0.6});
         new Effect.BlindDown(to_show, {duration: 0.6});
-        
-        
+        if(toggle){
+            $('row_' + row_num).addClassName('highlight');
+        } else {
+            $('row_' + row_num).removeClassName('highlight');
+        }
     }
 
 }
@@ -55,44 +63,45 @@ function save_edit(row_num) {
     post += "submit=submit";
     
     var ajax = new Ajax.Updater('AJAX_update',
-                                'slots.php?mode=update&ajax',
+                                'admin.php?tab=slots&mode=update&ajax',
                                 { method: 'post',
                                   parameters: post,
                                   onSuccess: function() {
                                     var table = new Ajax.Updater(
                                                                 'row_' + row_num,
-                                                                'slots.php?ajax&row=' + row_num,
+                                                                'admin.php?tab=slots&ajax&row=' + row_num,
                                                                 { method: 'get'});
                                     }
                                  });
     document.getElementById('AJAX_update').style.display = 'block';
-    $('row_' + row_num).addClassName('highlight');  
 
 }
 
 function delete_row(row_num, start, end, days) {
     var confirmed = confirm("Please confirm that you would like to delete the slot running from " + start + " to " + end + " on " + days + ".\n\nNote that this will also delete any bookings associated with this slot.");
     
-    if (confirmed) {
-    
-        post = "submit=submit&id=" + row_num + "&start=" + start + "&end=" + end + "&days=" + days;
-
-        var del = new Ajax.Updater('AJAX_update',
-                                    'slots.php?mode=delete&ajax',
-                                    { method: 'post',
-                                      parameters: post,
-                                      onSuccess: function() {
-                                        var hide = new Effect.BlindUp("row_" + row_num, {duration: 0.6});
-                                        }
-                                     });
-
+    if (!confirmed) {
+        return;
     }
+    
+    
+    post = "submit=submit&id=" + row_num + "&start=" + start + "&end=" + end + "&days=" + days;
+
+    var del = new Ajax.Updater('AJAX_update',
+                               'admin.php?tab=slots&mode=delete&ajax',
+                                {  method: 'post',
+                                   parameters: post,
+                                   onSuccess: function() {
+                                       var hide = new Effect.BlindUp("row_" + row_num, {duration: 0.6});
+                                   }
+                                });
+                                
     document.getElementById('AJAX_update').style.display = 'block';
     
 }
 
 /** Validates the create-slot form **/
-function slot_validate(form){
+function slot_validate(){
 
     // Form elements
     var s_h = parseInt(document.getElementById("s_h").value);
@@ -104,7 +113,7 @@ function slot_validate(form){
     var e_t = e_h + (e_m / 60);
 
     // Calculate the number of checkboxes
-    var days = document.getElementsByName("days[]");
+    var days = $$('form#create input[name="days[]"]');
     var num_days = 0;
     for (i = 0; i < days.length; i++){
         if(days[i].checked) {
@@ -112,11 +121,10 @@ function slot_validate(form){
         }
     }
     
+    //alert(num_days + " of " + days.length);
 
     // Error variables
     var error = false; var errors = "";
-
-    //with(form) {
 
         if(!validate_field_limit("s_h",24)) {
             error = true; errors += "The start-time hours field is invalid.\n";
@@ -137,12 +145,12 @@ function slot_validate(form){
         if (s_t > e_t) {
             error = true;
             errors += "The end time has to be after the start time.\n";
-        }        
+        }
 
         if(num_days == 0){
             error = true; errors += "You have not selected any days.\n";
         }
-    //}
+
 
     if(error) {
         alert(errors);

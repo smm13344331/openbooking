@@ -7,6 +7,7 @@
   the BSD license will take precedence.
 	
   Set tabs to 4 for best viewing.
+  ** Edited to conform to non-SQL92 servers by Craig Watson [ craig@cwatson.org ]
  
 */
 
@@ -21,7 +22,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 	var $addCol = ' ADD COLUMN';
 	var $quote = '"';
 	var $renameTable = 'ALTER TABLE %s RENAME TO %s'; // at least since 7.1
-	var $dropTable = 'DROP TABLE %s CASCADE';
+	var $dropTable = 'DROP TABLE %s';
 	
 	function MetaType($t,$len=-1,$fieldobj=false)
 	{

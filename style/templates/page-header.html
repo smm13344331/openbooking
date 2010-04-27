@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="style/css/stylesheet.css" title="style" />
+	<link rel="stylesheet" type="text/css" href="style/css/datepicker.css" title="style" />
 	<script src="javascript/prototype.js" type="text/JavaScript"></script>
 	<script src="javascript/common.js" type="text/JavaScript"></script>
 	<script src="javascript/scriptaculous/scriptaculous.js?load=effects" type="text/JavaScript"></script>
@@ -11,17 +12,32 @@
 
 <body>
     <div id="header">
-        <h1><a href="index.html"><img src="images/logo.jpg" alt="openBooking Logo" /></a></h1>
-    </div>
-
-    <div id="navigation">
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="slots.php">Slots</a></li>
-            <li>Link</li>
-        </ul>
+        <h1><a href="index.php"><img src="images/logo.jpg" alt="openBooking Logo" /></a></h1>
     </div>
     
-    <div id="content">
+    <div id="wrapper">
+    <div id="tab_bar">
+        <ul class="inline">
+            <li><span class="label"><strong>User&nbsp;</strong></span></li>
+            <li<?php if ($template['page_slug'] == "me") { echo ' class="active_tab"';}?>><a href="index.php"><span>Dashboard</span></a></li>
+            <li<?php if ($template['page_slug'] == "all") { echo ' class="active_tab"';}?>><a href="index.php?tab=bookings&amp;all"><span>All Bookings</span></a></li>
+            <!--<li<?php if ($template['page_slug'] == "settings") { echo ' class="active_tab"';}?>><a href="index.php"><span>Settings</span></a></li>-->
+        </ul>
+        <?php if(isset($_SESSION['admin'])){ if ($_SESSION['admin']){ ?>
+        <ul class="inline">
+            <li><span class="label"><strong>Admin&nbsp;</strong></span></li>
+            <li<?php if ($template['page_slug'] == "admin_slots") { echo ' class="active_tab"';}?>><a href="admin.php?tab=slots"><span>Slots</span></a></li>
+            <li<?php if ($template['page_slug'] == "admin_locations") { echo ' class="active_tab"';}?>><a href="admin.php?tab=locations"><span>Locations</span></a></li>
+            <li<?php if ($template['page_slug'] == "admin_resources") { echo ' class="active_tab"';}?>><a href="admin.php?tab=resources"><span>Resources</span></a></li>
+            <!--<li<?php if ($template['page_slug'] == "admin_settings") { echo ' class="active_tab"';}?>><a href="admin.php?tab=settings"><span>Settings</span></a></li>-->
+        </ul>
+        <?php } } ?>
+        <?php if (isset($_SESSION['username'])){?>
+            <p>Logged in as: <strong><?php echo $_SESSION['username'];?></strong> <small> [ <a href="logout.php">Log out</a> ]</small></p>
+        <?php } else { ?>
+            <p><small> [ <a href="login.php">Log in</a> ]</small></p>
+        <?php } ?>
+    </div>
+    
+    <div id="content"> 
 <!-- START PAGE-SPECIFIC CONTENT -->
-    <h2><?php echo $template['page_header'];?></h2>

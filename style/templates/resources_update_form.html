@@ -1,0 +1,47 @@
+        <fieldset><h3>Update Resource</h3>
+        <form action="#" method="post" id="update_resources" onsubmit="return false">
+            <dl>
+                <dt><label for="update_resource_name"><strong>Resource Name</strong></label></dt>
+                <dd><input type="text" size="13" name="resource_name" id="update_resource_name" value="<?php echo $resource['resource_name'];?>" /></dd>
+            </dl><dl>
+                <dt><label for="update_resource_category"><strong>Category</strong> </label></dt>
+                <dd id="update_resource_category"><?php echo display_categories($all_categories,$resource['category_id']);?></dd>
+                <dd><label><small><a href="javascript:ajax_update('AJAX_update','admin.php?tab=resources&amp;mode=create&amp;cat&amp;ajax&amp;update=update_resource_category')">Create</a> | <a href="javascript:show_update_category('update_resource_category')">Edit</a> | <a href="javascript:delete_category()">Delete</a></small></label></dd>
+            </dl><dl>
+                <dt><label for="update_resource_base"><strong>Return Location</strong></label></dt>
+                <dd id="update_resource_base"><?php echo display_form($all_locations, "return_location", $resource['return_location_id']);?></dd>
+            </dl><dl>
+                <dt><label for="update_resource_bookable"><strong>Bookable Location</strong></label></dt>
+                <dd id="update_resource_bookable"><?php echo display_form($all_locations, "bookable_location", $resource['booking_location_id']);?></dd>
+            </dl><!--<dl>
+                <dt><label for="update_advance"><strong>Advance Bookings</strong></label></dt>
+                <dd id="update_advance">
+                    <input type="text" size="3" value="<?php echo $resource['advance'];?>" name="advance_time" id="advance_time" />&nbsp;
+                    <select name="advance_unit">
+                        <?php global $time_units; foreach ($time_units as $key => $unit){
+                            echo '<option value="' . $key . '" ';
+                            if(strcmp($key,$resource['advance_unit']) == 0) { echo ' selected="selected"';}
+                            echo '>' . $unit . "</option>\n";
+                         }?>
+                    </select>
+                </dd>
+            </dl><dl>
+                <dt><label for="update_mtbb"><acronym title="The minimum time between bookings"><strong>MTBB</strong></acronym></label></dt>
+                <dd id="update_mtbb">
+                    <input type="text" size="3" value="<?php echo $resource['mtbb_time'];?>" name="mtbb_time" id="mtbb_time" />&nbsp;
+                    <select name="mtbb_unit">
+                        <?php global $time_units; foreach ($time_units as $key => $unit){
+                            echo '<option value="' . $key . '" ';
+                            if(strcmp($key,$resource['mtbb_unit']) == 0) { echo ' selected="selected"';}
+                            echo '>' . $unit . "</option>\n";
+                         }?>
+                    </select>
+                </dd>
+            </dl>--><dl>
+                <input type="checkbox" name="active[]" id="active" <?php if($resource['bookable']) { echo 'checked="checked"';}?>/>&nbsp;<label for="active"><strong>Resource Active</strong></label>
+            </dl><dl>
+                <dd><input type="button" onclick="submitResource('update','<?php echo $resource['resource_id'];?>')" id="submit_update_resource" name="submit" value="Update" />&nbsp;
+                    <input type="button" onclick="cancel_update()" value="Cancel" /></dd>
+            </dl>
+        </form>
+        </fieldset>
