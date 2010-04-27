@@ -1,0 +1,15 @@
+<h3>Update Location</h3>
+<form action="#" method="post" id="loc_update" onsubmit="return false"><p>
+    <label for="update_name"><strong>Name</strong></label>&nbsp;&nbsp;
+    <input type="text" size="15" value="<?php echo $location[0]['loc_name']; ?>" name="update_name" id="update_name" />
+</p><?php if ($location[0]['loc_num_children'] == 0) {?><p>
+    <label for="update_parent"><strong>Parent</strong></label>&nbsp;&nbsp;
+    <?php echo $parents_form; ?>
+    <input type="hidden" name="old_parent" value="<?php echo $location[0]['loc_parent_id'];?>" />
+    <input type="hidden" name="type" value="<?php echo $location[0]['loc_type'];?>" />
+</p><?php } ?><p>
+    <input type="hidden" name="children" value="<?php echo $location[0]['loc_num_children'];?>" />
+    <input type="hidden" name="id" value="<?php echo $location[0]['location_id'];?>" />
+    <input type="button" name="submit" onclick="javascript:ajax_form_submit('loc_update', 'AJAX_update', 'admin.php?tab=locations&mode=update&ajax', true, 'locations_map', 'admin.php?tab=locations&ajax')" value="Save" />&nbsp;
+    <input type="button" onclick="javascript:$$('p.location').invoke('removeClassName','highlight');hide_element('AJAX_update')" value="Cancel" />
+</p></form>

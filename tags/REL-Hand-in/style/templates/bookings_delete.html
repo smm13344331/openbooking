@@ -1,0 +1,9 @@
+<h3>Delete Booking</h3>
+    <form id="booking_delete" action="#" method="post" onsubmit="return false">
+    <p>Please confirm that you wish to delete the highlighted booking.</p>
+    <p>
+        <input type="hidden" name="id" value="<?php echo $id;?>" />
+        <input onclick="ajax_form_submit('booking_delete', 'AJAX_update', 'index.php?tab=bookings&amp;mode=delete&amp;ajax&id=<?php echo $id;?>',true,'bookings_container', '<?php echo $ref;?>')" type="button" name="submit" value="Delete" />
+        <input type="button" onclick="hide_element('AJAX_update');$$('table#bookings_table tr').invoke('removeClassName','highlight');" value="Cancel" />
+    </p>
+    </form>

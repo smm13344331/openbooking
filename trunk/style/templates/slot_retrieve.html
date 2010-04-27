@@ -1,0 +1,20 @@
+<div style="margin-right: 235px;">
+
+<h2><?php echo $template['page_header']; ?></h2>
+
+    <h3>Current Slots</h3>
+    <p>To update or delete a slot, click on the appropriate icon in the table below. To create a new slot, enter the details in the form on the right.</p>
+    
+    <table id="slotsTable" class="slots" style="margin: 0px auto;" border="0" cellspacing="1" cellpadding="5">
+    <thead><tr>
+        <th>Start</th>
+        <th>End</th>
+        <th>Days</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr></thead>
+    <tbody id="slots_container">
+        <?php echo $template['slots']; ?>
+    </tbody>
+    </table>
+</div>

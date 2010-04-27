@@ -1,0 +1,27 @@
+<div style="margin-right: 185px;">
+<?php if (strcmp($template['realm'],"all") == 0){?>
+    <h2>All Bookings</h2>
+<?php } elseif(strcmp($template['page_slug'],"all") == 0){?>
+    <h2>Bookings for <?php echo clean_string($_GET['user']); ?></h2>
+    <p><a href="index.php?tab=bookings&all"><small>&lt; Back to All Bookings</small></a></p>
+<?php } else { ?>
+    <h2>My Dashboard</h2>
+    <p>Welcome to your dashboard. From this screen, you can manage existing bookings and create new ones using the form on the right. The table below shows just only bookings made under your account.</p>
+    <p><strong>Please note that bookings cannot be updated once made, only deleted.</strong></p>
+<?php } ?>
+    <table id="bookings_table" class="bookings" style="margin: 0px auto;" border="0" cellspacing="1" cellpadding="3">
+    <thead><tr>
+        <th>Resource</th>
+        <th>Date</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Location</th>
+        <th>Return To</th>
+        <?php if (strcmp($template['realm'],"all") == 0){ echo "<th>User</th>";}?>
+    </tr></thead>
+    <tbody id="bookings_container">
+        <?php echo $template['bookings']; ?>
+    </tbody>
+    </table>
+    
+</div>

@@ -1,0 +1,56 @@
+<script src="javascript/forms.js" type="text/JavaScript"></script>
+<script src="javascript/ajax.js" type="text/JavaScript"></script>
+<script src="javascript/resources.js" type="text/JavaScript"></script>
+
+<div class="right_panel" style="width: 200px">
+    <div id="AJAX_update">&nbsp;</div>
+    
+    <div id="right_panel">
+        <fieldset style="margin-bottom: 20px"><h3>Create Resource</h3>
+        <form action="#" method="post" id="create_resources" onsubmit="return false">
+            <dl>
+                <dt><label for="create_resource_name"><strong>Resource Name</strong></label></dt>
+                <dd><input type="text" size="13" name="resource_name" id="create_resource_name" /></dd>
+            </dl><dl>
+                <dt><label for="resource_category"><strong>Category</strong></label></dt>
+                <dd id="resource_category_dd"><?php echo $template['category_list'];?></dd>
+                <dd><label><small><a href="javascript:ajax_update('AJAX_update','admin.php?tab=resources&amp;mode=create&amp;cat&amp;ajax&amp;update=resource_category_dd')">Create</a> | <a href="javascript:show_update_category('resource_category_dd')">Edit</a> | <a href="javascript:delete_category('resource_category_dd')">Delete</a></small></label></dd>
+            </dl><dl>
+                <dt><label for="resource_base"><strong>Return Location</strong></label></dt>
+                <dd id="resource_base"><?php echo $template['location_list'];?></dd>
+            </dl><dl>
+                <dt><label for="resource_bookable"><strong>Bookable Location</strong></label></dt>
+                <dd id="resource_bookable"><?php echo $template['book_location'];?></dd>
+            </dl><!--<dl>
+                <dt><label for="advance"><strong>Advance Bookings</strong></label></dt>
+                <dd id="advance">
+                    <input type="text" size="3" value="1" name="advance_time" id="advance_time" />&nbsp;
+                    <select name="advance_unit">
+                        <?php global $time_units; foreach ($time_units as $key => $unit){
+                            echo '<option value="' . $key . '" ';
+                            if($key == "M") { echo ' selected="selected"';}
+                            echo '>' . $unit . "</option>\n";
+                         }?>
+                    </select>
+                </dd>
+            </dl><dl>
+                <dt><label for="mtbb"><acronym title="The minimum time between bookings"><strong>MTBB</strong></acronym></label></dt>
+                <dd id="mtbb">
+                    <input type="text" size="3" value="1" name="mtbb_time" id="mtbb_time" />&nbsp;
+                    <select name="mtbb_unit">
+                        <?php global $time_units; foreach ($time_units as $key => $unit){
+                            echo '<option value="' . $key . '" ';
+                            if($key == "h") { echo ' selected="selected"';}
+                            echo '>' . $unit . "</option>\n";
+                         }?>
+                    </select>
+                </dd>
+            </dl>--><dl>
+                <dd><input type="button" onclick="submitResource('create',false)" id="submit_resource" name="submit" value="Create Resource" /></dd>
+            </dl>
+        </form>
+        </fieldset>
+    </div>
+    <div id="temp" style="display: none">&nbsp;</div>
+    <input type="hidden" id="update_toggle" value="0" />
+</div>

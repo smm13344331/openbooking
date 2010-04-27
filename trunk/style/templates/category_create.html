@@ -1,0 +1,10 @@
+<h3>Create Category</h3>
+<form action="#" method="post" id="create_category" onsubmit="return false">
+    <p>
+        <label for="category_name"><strong>Category Name</strong></label>&nbsp;&nbsp;
+        <input type="text" size="10" name="category_name" id="category_name" />
+    </p><p>
+        <input type="button" onclick="javascript:create_category('<?php echo $update;?>')" name="submit" value="Create" />&nbsp;&nbsp;
+        <input type="button" onclick="javascript:hide_element('AJAX_update')" value="Cancel" />
+    </p>
+</form>

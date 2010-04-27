@@ -1,0 +1,9 @@
+<h3>Delete Location</h3>
+    <form id="loc_delete" action="#" method="post" onsubmit="return false">
+    <p>Please confirm that you wish to delete the highlighted location.</p>
+    <p>
+        <input type="hidden" name="id" value="<?php echo $id;?>" ?>
+        <input onclick="ajax_form_submit('loc_delete', 'AJAX_update', 'admin.php?tab=locations&amp;mode=delete&amp;id=<?php echo $id;?>&amp;ajax',true,'locations_map', 'admin.php?tab=locations&amp;ajax')" type="button" name="submit" value="Delete" />
+        <input type="button" onclick="$$('p.location').invoke('removeClassName','highlight');hide_element('AJAX_update')" value="Cancel" />
+    </p>
+    </form>
