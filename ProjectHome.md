@@ -1,0 +1,3 @@
+openBooking is a free, open source web-based application, designed for use in schools, colleges and educational institutions to allow easy control and booking of an almost limitless set of bookable resources - from meeting rooms to laptops, projectors, lecture theatres and televisions.
+
+It is being developed by Craig Watson at Aberystwyth University as part of my Major Project. As well as contributing to my overall degree class, the project will also be released under the terms of the Mozilla Public License as a fully open-source project.
